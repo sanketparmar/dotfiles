@@ -1,0 +1,61 @@
+# set to yes if you want Conky to be forked in the background
+background yes
+use_xft yes
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_class Conky
+own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_colour brown
+own_window_transparent yes
+own_window_argb_value 0
+own_window_argb_visual yes
+
+# fiddle with window
+use_spacer none
+xftalpha 1
+
+# Update interval in seconds
+update_interval 120.0
+
+# Minimum size of text area
+
+# Draw shade yes
+#draw_shades yes
+
+# Text stuff
+draw_outline no # amplifies text if yes
+draw_borders no
+uppercase no # set to yes if you want all text to be in uppercase
+font Bitstream Vera Sans Mono:size=8
+
+# Stippled borders?
+#stippled_borders 3
+
+# border margins
+#border_margin 0
+
+# border width
+#border_width 0
+
+# Default colors and also border colors, grey90 == #e5e5e5
+#default_color #348a8f
+#maximum_width 20
+total_run_times 0
+draw_shades no
+use_spacer no
+minimum_size 1500 30
+
+
+# Text alignment, other possible values are commented
+alignment top_left
+#alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+gap_x  20
+gap_y 50
+
+TEXT
+${font Bitstream Vera Sans Mono:size=10}${execpi 60 shuf  ~/bin/quotes.txt -n 1 | fold -s -w120}${font}

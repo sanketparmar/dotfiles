@@ -1,0 +1,10 @@
+x 2013-03-31 create git account
+x 2013-04-02 create wordpress account for website
+x 2013-04-02 ask papa to collect marriege certificates
+x 2013-04-02 Update resume
+x 2013-04-02 use less salt
+x 2013-04-04 asdfsffsadasf
+x 2013-05-01 fillup the timesheet
+x 2013-05-09 fillup the sick leaves
+x 2013-08-17 improve IPFE with FEC
+x 2013-08-17 Basics of I2C

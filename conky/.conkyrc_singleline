@@ -1,0 +1,39 @@
+background yes
+use_xft yes
+xftfont Ubuntu Mono:size=9
+xftalpha 1
+out_to_console no
+update_interval 5.0
+total_run_times 0
+draw_shades no
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+
+# If own_window is yes, you may use type normal, desktop or override
+own_window_type normal
+
+# Use pseudo transparency with own_window?
+#own_window_transparent no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_argb_value 0
+#own_window_argb_visual yes
+own_window_class Conky
+own_window_transparent no
+out_to_console no
+
+
+
+double_buffer yes
+default_color 555753
+color1 grey
+alignment bottom_middle
+gap_x 0
+gap_y -10
+#no_buffers yes
+use_spacer no
+minimum_size 1700 1
+pad_percents 0
+
+TEXT
+${color}up ${color1}$uptime | ${color}c1 ${color1}${cpubar 6,35 cpu1} ${cpu cpu1}% ${color}c2 ${color1}${cpubar 6,35 cpu2} ${cpu cpu2}%  ${color}c3 ${color1}${cpubar 6,35 cpu3} ${cpu cpu3}% ${color}c4 ${color1}${cpubar 6,35 cpu4} ${cpu cpu4}% | ${color}mem ${color1}$memperc% ${membar 6,40} $mem | ${color}disk ${color1}${fs_used /}/${fs_size /} ${fs_bar 6,40 /} | ${color}load ${color1}$loadavg | ${if_up wlan0}${color}down: ${color1}${downspeed wlan0} ${color}${totaldown wlan0} downloaded ${color1} | ${color}up: ${color1}${upspeed wlan0} ${color}${totalup usb0} uploaded${endif} ${if_up usb0}${color}down: ${color1}${downspeed usb0} ${color}${totaldown usb0} downloaded ${color1} | ${color}up: ${color1}${upspeed usb0} ${color}${totalup usb0} uploaded${endif}

@@ -1,0 +1,66 @@
+#! /bin/bash
+###########################################################
+#
+# To start/stop vms from commandline
+# ./vbox - To list all vms and its status 
+# ./vbox 1 on - To start VM indexed at 1 with headless 
+# ./vbox 1 on 1 - To start VM indexed at 1 with GUI
+# ./vbox 1 off - To stop VM
+# ./vbox all on - To start all VMs
+# ./vbox all off - To stop all VMs
+#
+# 
+# - Sanket Parmar
+########################################################### 
+vm=$1
+action=$2
+noheadless=$3
+IFS=$'\n'
+vms_info=($(VBoxManage list vms))
+re="^\"([^\"]+)\" \{(.+)\}$"
+n=1
+for i in ${vms_info[@]}
+do
+	[[ $i =~ $re ]] && name="${BASH_REMATCH[1]}" && id="${BASH_REMATCH[2]}"
+	vms_name[$n]=$name
+	vms_id[$n]=$id
+	vms_stat[$n]=`VBoxManage showvminfo $id --machinereadable | grep VMState= | cut -d= -f2`
+	(( n++ ))
+done
+if [ "$vm" = "" ]; then
+	n=1;
+	for i in ${vms_name[@]}
+	do
+		echo "$n. $i ---- ${vms_stat[$n]}"
+		(( n++ ))
+	done
+	exit 0
+fi
+params=""
+if [ "$action" = "on" ]; then
+	action=startvm
+	if [ "$noheadless" = "" ]
+	then
+		params="--type headless"
+	fi
+	re="description=\"([^\"]+)\""
+	vms_info=`VBoxManage showvminfo ${vms_id[$vm]} --machinereadable`
+	[[ $vms_info =~ $re ]] && echo "Description:"; echo ${BASH_REMATCH[1]}
+elif [ "$action" = "off" ]; then
+	action=controlvm
+	params=poweroff
+fi
+
+if [ "$vm" = "all" ]; then
+	for i in ${vms_id[@]}
+        do
+                cmd="VBoxManage $action $i $params"
+		echo "$i - $cmd"
+		eval $cmd
+        done
+else
+	cmd="VBoxManage $action  ${vms_id[$vm]} $params"
+	echo ">$cmd<"
+	eval $cmd
+
+fi

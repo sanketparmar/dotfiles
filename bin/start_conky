@@ -1,0 +1,5 @@
+#!/bin/bash
+killall conky
+sleep 5; conky -d -c /home/$USER/.conkyrc_singleline
+sleep 5; conky -d -c /home/$USER/.conkyrc_todo
+sleep 5; conky -d -c  /home/$USER/.conkyrc_quotes
