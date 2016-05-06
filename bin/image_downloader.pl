@@ -4,10 +4,10 @@ use strict;
 my $thread = shift @ARGV;
 my $start = shift @ARGV;
 my $end = shift @ARGV;
-my $link = "http://www.exbii.com/showthread.php";
+my $link = "http://www.xossip.com/showthread.php";
 mkdir $thread if (! -d $thread);
 while($start <= $end) {
-print "------>>>>>>>>>>>>> Working for $link <<<<<<<----------\n";
+print "------>>>>>>>>>>>>> Working for $link/$thread/$start <<<<<<<----------\n";
 my $f = "$thread/temp.$start";
 if (-f $f) {
 	$start++;
@@ -21,7 +21,8 @@ while(my $line = <FH>) {
 	if ($line =~ m/<img src="(.+\/(.+jpg))"/ ) {
 		my $img = $1;
 		my $fname = "$thread/$2";
-		`wget -O $fname $img`;
+		$img =~ s/\/[vt]\//\/i\//;
+		`aria2c -o $fname $img`;
 	}
 }
 $start++;
